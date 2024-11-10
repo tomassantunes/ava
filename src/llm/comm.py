@@ -24,10 +24,10 @@ def get_completion(prompt: str, system: str, model: str = "gpt-4o-mini"):
 
     return completion.choices[0].message.content
 
-def get_response(message: str):
+def get_response(messages: list[dict]):
     response = swarm.run(
         agent=agents.orchestrator,
-        messages=[{"role": "user", "content": message}]
+        messages=messages
     )
     
     return response.messages[-1]["content"]

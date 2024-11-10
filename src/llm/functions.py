@@ -4,7 +4,6 @@ import logger
 
 from contextlib import redirect_stderr, redirect_stdout
 
-
 def run_python_code(code: str):
     stdout_capture = io.StringIO()
     stderr_capture = io.StringIO()
@@ -44,3 +43,11 @@ def create_file_with_content(file_name: str, content: str):
         logger.log(logger.LogType.SUCCESS, f"File {file_name} created successfully")
     except Exception as e:
         logger.log(logger.LogType.ERROR, f"Error creating file: {e}")
+
+def read_file(file_name: str):
+    try:
+        with open(f"{utils.SCRATCPAD_DIR}/{file_name}", "r") as file:
+            return file.read()
+    except Exception as e:
+        logger.log(logger.LogType.ERROR, f"Error reading file: {e}")
+        return None
