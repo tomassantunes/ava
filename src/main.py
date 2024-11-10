@@ -1,14 +1,16 @@
+import logger
+
 from llm import comm
 
 def main():
-    print("Starting AVA...")
+    logger.log(logger.LogType.INFO, "Starting Ava...")
     messages: list[dict] = []
     while True:
         user_input = input("Enter your message: ")
         messages.append({"role": "user", "content": user_input})
 
         response = comm.get_response(messages)
-        print("Response: " + response)
+        print("Response:", response)
 
         messages.append({"role": "assistant", "content": response})
     

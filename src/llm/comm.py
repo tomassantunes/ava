@@ -3,9 +3,7 @@ import os
 from dotenv import load_dotenv
 from openai import OpenAI
 from swarm import Swarm
-
 from llm import agents
-
 
 load_dotenv()
 
@@ -24,10 +22,11 @@ def get_completion(prompt: str, system: str, model: str = "gpt-4o-mini"):
 
     return completion.choices[0].message.content
 
-def get_response(messages: list[dict]):
+def get_response(messages: list[dict], context_vars: dict = {}):
     response = swarm.run(
         agent=agents.orchestrator,
-        messages=messages
+        messages=messages,
+        context_variables=context_vars
     )
     
     return response.messages[-1]["content"]
